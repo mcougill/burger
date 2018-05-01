@@ -1,6 +1,43 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Placeholder jumbotron</h1>
-    <p class="lead">This is a placeholder jumbotron</p>
-  </div>
+<h1>Burgers!</h1>
+
+<h2>Not Devoured</h2>
+
+<ul>
+    {{#each burgers}} 
+    {{#unless this.devoured}}
+    <li>
+        {{this.burger_name}}
+
+        <form action="/burgers/updateOne/{{this.id}}?_method=PUT" method="POST">
+            <input type="hidden" name="devoured" value="true">
+            <button type="submit">GOBBLE GOBBLE</button>
+        </form>
+    </li>
+    {{/unless}} 
+    {{/each}}
+</ul>
+
+<h2>Devoured</h2>
+
+<ul>
+    {{#each burgers}} 
+    {{#if this.devoured}}
+    <li>
+        {{this.burger_name}}
+
+        <form action="/burgers/updateOne/{{this.id}}?_method=PUT" method="POST">
+            <input type="hidden" name="devoured" value="true">
+            <button type="submit">GOBBLE GOBBLE</button>
+        </form>
+    </li>
+    {{/if}} 
+    {{/each}}
+</ul>
+
+<h2> Add a Burger</h2>
+<form class="create-update-form" action="burgers/create" method="POST">
+<div class="form-group">
+    <label for="bu">Burger Name:</label>
+    <textarea class="form-control" id="addBurger" rows="3"></textarea>
 </div>
+</form>
