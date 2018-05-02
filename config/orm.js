@@ -1,8 +1,12 @@
 //mySQL queries
 
+//require connection to mySQL database
 var connection = require("./connection.js");
 
 var orm = {
+
+    //add error status codes 
+    //add method override from video
 
     // selectAll()
     selectAll: function (whatToSelect, cb) {

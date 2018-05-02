@@ -6,6 +6,8 @@ var hbs = require("express-handlebars");
 //set port
 var PORT = process.env.PORT || 8500;
 
+app.use(express.static("public"));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
