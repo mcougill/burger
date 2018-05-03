@@ -5,37 +5,33 @@ var connection = require("./connection.js");
 
 var orm = {
 
-    //add error status codes 
-    //add method override from video
-
+    
     // selectAll()
-    selectAll: function (whatToSelect, cb) {
+    selectAll: function (table, cb) {
         var queryString = "SELECT * FROM ??";
-        connection.query(queryString, [whatToSelect], function (err, result) {
+        connection.query(queryString, [table], function (err, result) {
             if (err) throw err;
-            cb(result)
+            if(cb){cb(result);}
         });
     },
 
     // insertOne()
-    insertOne: function (tableInput, values, cb) {
-        var queryString = "INSERT INTO burgers ?? VALUES ?";
-        connection.query(queryString, [tableInput, values], function (err, result) {
+    insertOne: function (table, col1, col2 ,val1, val2) {
+        var queryString = "INSERT INTO ??(??, ??) VALUES (?, ?)";
+        connection.query(queryString, [table, col1, col2 ,val1, val2], function(err) {
             if (err) throw err;
-            cb(result);
-        })
+        });
     },
 
     // updateOne()
-    updateOne: function (updateTable, updateCol, newVal, filterCol, filterVal, cb) {
+     updateOne: function (table, col1, val1, col2, val2) {
         var queryString = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
-        connection.query(queryString, [updateTable, updateCol, newVal, filterCol, filterVal], function (err, result) {
-            if (err) throw err;
-            cb(result);
-        })
+        connection.query(queryString, [table, col1, val1, col2, val2], function(err) {
+           if (err) throw err;
+            
+          });
+     }
     }
-
-
-};
+  
 
 module.exports = orm;

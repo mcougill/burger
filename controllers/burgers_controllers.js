@@ -3,30 +3,28 @@ var router = express.Router();
 var burger = require("../models/burger.js");
 
 //express routes 
-router.get("/", function(req,res){
-    res.redirect("/burgers");
-});
 
-router.get("/burgers", function(req, res){
-    burger.selectAll(function (data){
-        var hbsObj = {burgers:data};
-        console.log(hbsObj);
+router.get("/", function (req, res) {
+    burger.selectAll(function (data) {
+        var hbsObj = { burgers: data };
+
+        for (i = 0; i < hbsObj.burgers.length; i++) {
+            hbsObj.burgers[i].devoured = parseInt(hbsObj.burgers[i].devoured);
+        }
+
         res.render("index", hbsObj);
     });
+
 });
 
-router.post("/burgers/insertOne", function(req,res){
-    burger.insertOne(["burger_name","devoured"], [req.body.burger_name, req.body.devoured], function(){
-        res.redirect("/burgers");
-    });
+router.post("/", function (req, res) {
+    burger.insertOne(req.body.newBurger);
+    res.redirect("/");
 });
 
-router.put("/burgers/updateOne/:id", function(req, res){
-    var condition = "id = " + req.params.id;
-    console.log("condition: ", condition);
-    burger.updateOne({devoured: req.body.devoured}, condition, function(){
-       res.redirect("/burgers");
-    });
+router.put("/:id", function (req, res) {
+    burger.updateOne(req.params.id);
+    res.redirect("/");
 });
 
 module.exports = router;

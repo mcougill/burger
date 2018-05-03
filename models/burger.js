@@ -9,17 +9,14 @@ var burger = {
         });
     },
 
-    insertOne: function(cols, vals, cb){
-        orm.insertOne("burgers", cols, vals, function(res){
-            cb(res);
-        });
+    insertOne: function(newBurger){
+        orm.insertOne("burgers", "burger_name", "devoured", newBurger,"0");
     },
 
-    updateOne: function(objColVals, condition, cb){
-        orm.updateOne("burgers", objColVals, condition, function(res){
-            cb(res);
-        })
+    updateOne: function(id){
+        orm.updateOne("burgers", "devoured", "1", "id", id);   
     }
+    
 };
 
 module.exports = burger;

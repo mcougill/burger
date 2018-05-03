@@ -1,3 +1,11 @@
-body {
-    color:red;
+body{
+    background: url("../img/burger.jpg") ;
+    background-size:cover;
+    color:rgb(139,0,0);
+    font-family: 'Comfortaa', cursive;
 }
+
+.special-card {    
+      background-color: rgba(245, 245, 245, .8);
+    }
+
